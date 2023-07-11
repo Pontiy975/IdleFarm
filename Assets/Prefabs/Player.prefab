@@ -50,8 +50,8 @@ MonoBehaviour:
   joystick: {fileID: 0}
   body: {fileID: 6986892993133922698}
   animator: {fileID: 5424393450490829279}
-  speed: 10
-  rotationSpeed: 10
+  speed: 50
+  rotationSpeed: 25
 --- !u!54 &2877590588849772442
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -312,8 +312,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7763570807369470768}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 29a1f41975ab8434db2b6d5bf1dd26bb, type: 3}
+  m_Controller: {fileID: 9100000, guid: 93e5a8339b0d0b84e94c45048b6de8c7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
