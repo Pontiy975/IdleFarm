@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2510637109883640996}
   - component: {fileID: 2510637109884640868}
   - component: {fileID: 7630403609788163127}
+  - component: {fileID: 3347894344383042413}
   m_Layer: 0
   m_Name: GardenBed
-  m_TagString: Untagged
+  m_TagString: Bed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,8 +93,20 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2510637109886632100}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 0.22, z: 4}
+  m_Size: {x: 4, y: 0.89, z: 4}
   m_Center: {x: 0, y: 0.105000004, z: 0}
+--- !u!114 &3347894344383042413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2510637109886632100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33a89046472763448a765be494eab410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

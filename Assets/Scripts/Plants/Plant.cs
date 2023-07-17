@@ -1,28 +1,37 @@
-using System;
 using UnityEngine;
 
 namespace Plants
 {
-    public enum PlantType
+    public abstract class Plant : MonoBehaviour
     {
-        Wheat,
-        Corn,
-        Tomato
-    }
+        [SerializeField]
+        protected Transform sprout, plant;
 
-    [Serializable]
-    public class Plant
-    {
-        public PlantType type;
+        protected float growthTime, cost;
+        protected bool isGrownUp;
 
-        [Space]
-        public Sprite sprite;
+        private float _cooldown;
 
-        [Space]
-        public PlantInstance plantPrefab;
+        protected void Init(PlantConfiguration plant)
+        {
+            growthTime = plant.growthTime;
+            cost = plant.cost;
 
-        [Space]
-        public float growthTime;
-        public float cost;
+            _cooldown = growthTime;
+        }
+
+        protected void Timer()
+        {
+            if (isGrownUp) return;
+
+            _cooldown -= Time.deltaTime;
+            if (_cooldown <= 0f)
+            {
+                isGrownUp = true;
+                Growth();
+            }
+        }
+
+        protected abstract void Growth();
     }
 }

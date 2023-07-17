@@ -1,6 +1,8 @@
-using System;
 using UnityEngine;
 using DG.Tweening;
+
+using PlantType = Plants.PlantType;
+
 
 public class Crate : MonoBehaviour
 {
@@ -17,11 +19,13 @@ public class Crate : MonoBehaviour
 
 
     private Transform _transform;
+    private PlantType _type = PlantType.None;
 
     private int _seedsCount;
 
-
+    public int SeedsCount => _seedsCount;
     public bool IsFull => _seedsCount >= Capacity;
+    public PlantType Type => _type;
 
 
     private void Start()
@@ -40,20 +44,47 @@ public class Crate : MonoBehaviour
                   .SetEase(Ease.OutBack);
     }
 
-    public void AddSeeds(bool withBounce = true)
+    public void Hide()
     {
+        _type = PlantType.None;
+        _seedsCount = 0;
+
+        gameObject.SetActive(false);
+    }
+
+    public void AddSeeds(PlantType type, bool withBounce = true)
+    {
+        if (_type != PlantType.None && _type != type) return;
+        // TODO: added red blink animation
+
         if (seedsMesh.localPosition.y < MaxSeedHeight)
         {
             if (withBounce)
                 Bounce();
 
-            Vector3 position = seedsMesh.localPosition;
-            position.y += SeedStep;
+            ChangeSeedsPosition(SeedStep);
 
-            seedsMesh.localPosition = position;
+            _seedsCount++;
+            _type = type;
         }
     }
 
+    private void ChangeSeedsPosition(float step)
+    {
+        Vector3 position = seedsMesh.localPosition;
+        position.y += step;
+
+        seedsMesh.localPosition = position;
+    }
+
+    public void GetSeed()
+    {
+        if (_seedsCount > 0)
+        {
+            _seedsCount--;
+            ChangeSeedsPosition(-SeedStep);
+        }
+    }
 
     private void Bounce()
     {

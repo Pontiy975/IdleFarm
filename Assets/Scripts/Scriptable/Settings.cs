@@ -21,11 +21,11 @@ public class Settings : ScriptableObject
     #endregion
 
     [SerializeField]
-    private Plant[] plants;
+    private PlantConfiguration[] plants;
 
-    public Plant GetPlantByIndex(int index) => plants[index];
+    public PlantConfiguration GetPlantByIndex(int index) => plants[index];
 
-    public Plant GetPlantByType(PlantType type)
+    public PlantConfiguration GetPlantByType(PlantType type)
     {
         foreach (var plant in plants)
             if (plant.type == type)

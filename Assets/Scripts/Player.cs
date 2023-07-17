@@ -5,7 +5,7 @@ using UnityEngine.Animations.Rigging;
 
 [SelectionBase]
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField]
@@ -37,7 +37,9 @@ public class PlayerController : MonoBehaviour
     private Transform _transform;
     private Rigidbody _rigidbody;
 
-    private bool _isLoading;
+    private bool
+        _isLoading,
+        _crateIsActive;
 
     private Coroutine _seedsLoadingRoutine;
 
@@ -66,8 +68,28 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Dock") && !_isLoading)
         {
+            SeedsDock dock = other.GetComponent<SeedsDock>();
+
             _isLoading = true;
-            _seedsLoadingRoutine = StartCoroutine(SeedsLoadingRoutine());
+            _seedsLoadingRoutine = StartCoroutine(SeedsLoadingRoutine(dock.Type));
+        }
+
+        if (other.CompareTag("Bed") && _crateIsActive)
+        {
+            GardenBed bed = other.GetComponent<GardenBed>();
+
+            print($"{bed.IsEmpty} || {bed.Type} || {crate.Type}");
+
+            if (bed.IsEmpty && bed.Type == crate.Type && crate.SeedsCount > 0)
+            {
+                crate.GetSeed();
+                bed.Planting();
+
+                if (crate.SeedsCount <= 0)
+                {
+                    HideCrate();
+                }
+            }
         }
     }
 
@@ -76,7 +98,9 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Dock") && _isLoading)
         {
             _isLoading = false;
-            StopCoroutine(_seedsLoadingRoutine);
+
+            if (_seedsLoadingRoutine != null)
+                StopCoroutine(_seedsLoadingRoutine);
         }
     }
 
@@ -114,24 +138,35 @@ public class PlayerController : MonoBehaviour
 
     private void ShowCrate()
     {
+        _crateIsActive = true;
+
         crate.gameObject.SetActive(true);
         crate.Show();
 
         rig.enabled = true;
     }
 
-    private IEnumerator SeedsLoadingRoutine()
+    private void HideCrate()
     {
-        if (!crate.gameObject.activeInHierarchy)
+        _crateIsActive = false;
+
+        crate.Hide();
+
+        rig.enabled = false;
+    }
+
+    private IEnumerator SeedsLoadingRoutine(Plants.PlantType type)
+    {
+        if (!_crateIsActive)
         {
             ShowCrate();
-            crate.AddSeeds(false);
+            crate.AddSeeds(type, false);
         }
 
         while (!crate.IsFull)
         {
             yield return new WaitForSeconds(loadingDelay);
-            crate.AddSeeds();
+            crate.AddSeeds(type);
         }
 
         _isLoading = false;
