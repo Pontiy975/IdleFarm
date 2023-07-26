@@ -22,5 +22,7 @@ namespace Plants
         [Space]
         public float growthTime;
         public float cost;
+
+        public Type t;
     }
 }

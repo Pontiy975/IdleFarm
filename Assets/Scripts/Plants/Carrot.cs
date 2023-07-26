@@ -11,9 +11,16 @@ public class Carrot : Plant
     }
 
 
+    public override void ReturnToPool()
+    {
+        controller.ReturnToPool(this);
+    }
+
+
     protected override void Growth()
     {
-        print("growthn");
+        base.Growth();
+
         sprout.gameObject.SetActive(false);
         plant.gameObject.SetActive(true);
 

@@ -27,6 +27,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Crate crate;
 
+    [Header("Stack")]
+    [SerializeField]
+    private Stack stack;
+
     [SerializeField]
     private RigBuilder rig;
 
@@ -78,15 +82,22 @@ public class Player : MonoBehaviour
         {
             GardenBed bed = other.GetComponent<GardenBed>();
 
-            if (_crateIsActive && bed.IsEmpty && bed.Type == crate.Type && crate.SeedsCount > 0)
+            if (_crateIsActive)
             {
-                crate.GetSeed();
-                bed.Planting();
-
-                if (crate.SeedsCount <= 0)
+                if (bed.IsEmpty && bed.Type == crate.Type && crate.SeedsCount > 0)
                 {
-                    HideCrate();
+                    crate.GetSeed();
+                    bed.Planting();
+
+                    if (crate.SeedsCount <= 0)
+                    {
+                        HideCrate();
+                    }
                 }
+            }
+            else if (bed.ReadyToHarvest && !stack.IsFull)
+            {
+                stack.AddPlant(bed.Harvest());
             }
         }
     }

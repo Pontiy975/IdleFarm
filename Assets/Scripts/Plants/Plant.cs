@@ -1,23 +1,32 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
+
+using Random = UnityEngine.Random;
 
 namespace Plants
 {
     public abstract class Plant : PoolableObject
     {
+        public event Action OnGrown;
+
         [SerializeField]
         protected Transform sprout, plant;
 
         protected float growthTime, cost;
         protected bool isGrownUp, isPlanted;
 
+        protected PoolController controller;
         protected Transform _transform;
 
         private float _cooldown;
 
+        public PlantConfiguration Config { get; private set; }
+
 
         private void Awake()
         {
+            controller = GameManager.Instance.PoolController;
             _transform = transform;
         }
 
@@ -35,11 +44,15 @@ namespace Plants
 
         public void Init(PlantConfiguration plant)
         {
+            Config = plant;
+
             growthTime = plant.growthTime;
             cost = plant.cost;
 
             _cooldown = growthTime;
         }
+
+        public abstract void ReturnToPool();
 
 
         protected void Timer()
@@ -54,6 +67,9 @@ namespace Plants
             }
         }
 
-        protected abstract void Growth();
+        protected virtual void Growth()
+        {
+            OnGrown?.Invoke();
+        }
     }
 }

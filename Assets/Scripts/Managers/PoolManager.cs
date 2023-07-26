@@ -50,7 +50,7 @@ public class PoolManager : MonoBehaviour
     public void ReturnToPool<T>(T item) where T : PoolableObject
     {
         Pool<PoolableObject> pool = GetPool<T>();
-        
+
         if (pool != null)
         {
             item.OnDespawn();

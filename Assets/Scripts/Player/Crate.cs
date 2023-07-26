@@ -17,8 +17,12 @@ public class Crate : MonoBehaviour
     [SerializeField]
     private Transform seedsMesh;
 
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
 
     private Transform _transform;
+    private Settings _settings;
     private PlantType _type = PlantType.None;
 
     private int _seedsCount;
@@ -31,6 +35,7 @@ public class Crate : MonoBehaviour
     private void Start()
     {
         _transform = transform;
+        _settings = Settings.Instance;
         gameObject.SetActive(false);
     }
 
@@ -66,6 +71,8 @@ public class Crate : MonoBehaviour
 
             _seedsCount++;
             _type = type;
+
+            spriteRenderer.sprite = _settings.GetPlantByType(type).sprite;
         }
     }
 
