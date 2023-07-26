@@ -159,7 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joystick: {fileID: 0}
   body: {fileID: 6986892993133922698}
-  speed: 50
+  speed: 70
   rotationSpeed: 25
   animator: {fileID: 5424393450490829279}
   crate: {fileID: 7238586830277023612}
