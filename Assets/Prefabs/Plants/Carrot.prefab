@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 6848795449950979466}
   - component: {fileID: 6858775635169971524}
   m_Layer: 0
-  m_Name: Carrot_Plant
+  m_Name: Sprout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 8149621055929983143}
   - component: {fileID: 8159904724370006257}
   m_Layer: 0
-  m_Name: Carrot_Fruit
+  m_Name: Plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,7 +157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8174022325392475571}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.055, z: 0}
+  m_LocalPosition: {x: 0, y: -0.219, z: 0}
   m_LocalScale: {x: 1.4393, y: 1.4393, z: 1.4393}
   m_ConstrainProportionsScale: 1
   m_Children: []

@@ -15,6 +15,5 @@ MonoBehaviour:
   plants:
   - type: 0
     sprite: {fileID: 0}
-    plantPrefab: {fileID: 0}
-    growthTime: 5
+    growthTime: 60
     cost: 10

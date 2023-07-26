@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894e274327bc34c46a244ed3543a9f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantsController: {fileID: 787777045}
+  poolController: {fileID: 787777045}
 --- !u!1001 &37912041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1159,7 +1159,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 36810829}
-  - {fileID: 2059787616}
+  - {fileID: 643372054}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1254,6 +1254,86 @@ PrefabInstance:
         type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04fe5d13c90294c45bd06c309268fd53, type: 3}
+--- !u!1001 &643372053
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 489653336}
+    m_Modifications:
+    - target: {fileID: 6191693472167275840, guid: b07e3ad57313eb54086ed28f5b38629a,
+        type: 3}
+      propertyPath: pools.Array.data[0].poolSize
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191693472167275841, guid: b07e3ad57313eb54086ed28f5b38629a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191693472167275841, guid: b07e3ad57313eb54086ed28f5b38629a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191693472167275841, guid: b07e3ad57313eb54086ed28f5b38629a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191693472167275841, guid: b07e3ad57313eb54086ed28f5b38629a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191693472167275841, guid: b07e3ad57313eb54086ed28f5b38629a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191693472167275841, guid: b07e3ad57313eb54086ed28f5b38629a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191693472167275841, guid: b07e3ad57313eb54086ed28f5b38629a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191693472167275841, guid: b07e3ad57313eb54086ed28f5b38629a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191693472167275841, guid: b07e3ad57313eb54086ed28f5b38629a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191693472167275841, guid: b07e3ad57313eb54086ed28f5b38629a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191693472167275841, guid: b07e3ad57313eb54086ed28f5b38629a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191693472167275842, guid: b07e3ad57313eb54086ed28f5b38629a,
+        type: 3}
+      propertyPath: m_Name
+      value: PoolManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b07e3ad57313eb54086ed28f5b38629a, type: 3}
+--- !u!4 &643372054 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6191693472167275841, guid: b07e3ad57313eb54086ed28f5b38629a,
+    type: 3}
+  m_PrefabInstance: {fileID: 643372053}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &731353541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1484,7 +1564,7 @@ GameObject:
   - component: {fileID: 787777046}
   - component: {fileID: 787777045}
   m_Layer: 0
-  m_Name: PlantsController
+  m_Name: PoolController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4002,54 +4082,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 624310977}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2059787615
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2059787616}
-  - component: {fileID: 2059787617}
-  m_Layer: 0
-  m_Name: PoolManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2059787616
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059787615}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 489653336}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2059787617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059787615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4509aae447d5494fa3053bae3da39f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  carrotPool:
-    prefab: {fileID: 7674351159501458097, guid: 20a97bb13c3ef18478cf9c86535b1e9b,
-      type: 3}
-    poolSize: 12
 --- !u!1001 &2111560592
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -74,13 +74,11 @@ public class Player : MonoBehaviour
             _seedsLoadingRoutine = StartCoroutine(SeedsLoadingRoutine(dock.Type));
         }
 
-        if (other.CompareTag("Bed") && _crateIsActive)
+        if (other.CompareTag("Bed"))
         {
             GardenBed bed = other.GetComponent<GardenBed>();
 
-            print($"{bed.IsEmpty} || {bed.Type} || {crate.Type}");
-
-            if (bed.IsEmpty && bed.Type == crate.Type && crate.SeedsCount > 0)
+            if (_crateIsActive && bed.IsEmpty && bed.Type == crate.Type && crate.SeedsCount > 0)
             {
                 crate.GetSeed();
                 bed.Planting();

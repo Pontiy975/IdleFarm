@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     [SerializeField]
-    private PlantsController plantsController;
+    private PoolController poolController;
 
-    public PlantsController PlantsController => plantsController;
+    public PoolController PoolController => poolController;
 }

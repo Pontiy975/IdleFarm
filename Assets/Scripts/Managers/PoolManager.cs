@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Plants;
-
 
 public class PoolManager : MonoBehaviour
 {
@@ -24,35 +22,53 @@ public class PoolManager : MonoBehaviour
 
 
     [SerializeField]
-    private Pool<Carrot> carrotPool = new Pool<Carrot>(Instantiate);
+    private Pool<PoolableObject>[] pools;
 
 
     private void Start()
     {
-        carrotPool.InitPool();
+        for (int i = 0; i < pools.Length; i++)
+            pools[i].InitPool(Instantiate);
     }
 
 
-    public T GetItem<T>()
+    public T GetItem<T>() where T : PoolableObject
     {
-        switch (typeof(T).ToString())
+        Pool<PoolableObject> pool = GetPool<T>();
+
+        if (pool != null)
         {
-            case "CarrotInstance":
-            default:
-                return (T)(object)carrotPool.GetItem();
+            PoolableObject item = pool.GetItem();
+            item.OnSpawn();
+            
+            return item as T;
+        }
+
+        return default;
+    }
+
+    public void ReturnToPool<T>(T item) where T : PoolableObject
+    {
+        Pool<PoolableObject> pool = GetPool<T>();
+        
+        if (pool != null)
+        {
+            item.OnDespawn();
+            pool.ReturnToPool(item);
         }
     }
 
-    public void ReturnToPool<T>(T item)
+    private Pool<PoolableObject> GetPool<T>()
     {
-        switch (typeof(T).ToString())
+        for (int i = 0; i < pools.Length; i++)
         {
-            case "CarrotInstance":
-            default:
-                carrotPool.ReturnToPool(item as Carrot);
+            Pool<PoolableObject> pool = pools[i];
 
-                break;
+            if (pool.CheckItemType<T>())
+                return pool;
         }
+
+        return null;
     }
 }
 
@@ -60,9 +76,12 @@ public class PoolManager : MonoBehaviour
 [Serializable]
 public class Pool<T>
 {
-    [SerializeField] private T prefab;
+    [SerializeField] 
+    private T prefab;
 
-    [SerializeField] private int poolSize;
+    [SerializeField]
+    [Range(0, 100)]
+    private int poolSize;
 
     private List<T> _pool = new List<T>();
 
@@ -72,40 +91,27 @@ public class Pool<T>
 
     public int Count => _pool.Count;
 
-    public Pool(Func<T, T> instantiateDelegate)
+
+    public void InitPool(Func<T, T> instantiateDelegate)
     {
+        _container = new GameObject($"{prefab.GetType().Name}Pool").transform;
         _instanceDelegate = instantiateDelegate;
-    }
-
-    public void InitPool()
-    {
-        _container = new GameObject($"{typeof(T).Name}Pool").transform;
-
+        
         for (int i = 0; i < poolSize; i++)
-        {
             AddItem(i);
-        }
     }
 
-    private T AddItem(int number)
+    private void AddItem(int number)
     {
         T item = _instanceDelegate(prefab);
         _pool.Add(item);
 
-        if (item is MonoBehaviour mono)
-        {
-            mono.name += $" {number}";
-            mono.transform.parent = _container;
-            mono.gameObject.SetActive(false);
-        }
-        else if (item is GameObject obj)
-        {
-            obj.name += $" {number}";
-            obj.transform.parent = _container;
-            obj.SetActive(false);
-        }
+        MonoBehaviour obj = item as MonoBehaviour;
 
-        return item;
+        obj.name += $" {number}";
+        obj.transform.parent = _container;
+
+        obj.gameObject.SetActive(false);
     }
 
     public T GetItem()
@@ -119,8 +125,11 @@ public class Pool<T>
 
     public void ReturnToPool(T item)
     {
-        _pool.Add(item);
-        if (item is MonoBehaviour mono) mono.gameObject.SetActive(false);
-        else if (item is GameObject obj) obj.SetActive(false);
+        _pool.SafeAdd(item);
+    }
+
+    public bool CheckItemType<S>()
+    {
+        return prefab != null && prefab.GetType() == typeof(S);
     }
 }
