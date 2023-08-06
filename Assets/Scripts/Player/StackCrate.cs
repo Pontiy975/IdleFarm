@@ -31,7 +31,9 @@ public class StackCrate : MonoBehaviour
         _transform.DOJump(point.position, 2f, 1, 1f).OnComplete(() =>
         {
             _transform.SetParent(parent);
+
             _transform.localPosition = position;
+            _transform.localRotation = Quaternion.identity;
 
             gameObject.SetActive(false);
         });

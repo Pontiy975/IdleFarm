@@ -8,6 +8,9 @@ public class GardenBed : MonoBehaviour
     [SerializeField]
     private PlantType type;
 
+    [SerializeField]
+    private GameObject smokeFX;
+
     private Plant plant;
 
     private Transform _transform;
@@ -38,6 +41,7 @@ public class GardenBed : MonoBehaviour
         plant.Planting(_transform);
 
         plant.OnGrown += Grown;
+        PlaySmoke();
     }
 
     public PlantConfiguration Harvest()
@@ -50,6 +54,8 @@ public class GardenBed : MonoBehaviour
         IsEmpty = true;
 
         plant.ReturnToPool();
+
+        PlaySmoke();
 
         return config;
     }
@@ -68,5 +74,16 @@ public class GardenBed : MonoBehaviour
             default:
                 return _controller.GetPlantFromPool<Carrot>();
         }
+    }
+
+    private void DisableSmoke()
+    {
+        smokeFX.SetActive(false);
+    }
+
+    private void PlaySmoke()
+    {
+        smokeFX.SetActive(true);
+        Invoke(nameof(DisableSmoke), 1f);
     }
 }
