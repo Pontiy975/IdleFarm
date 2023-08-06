@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public static class TransformExtensions
@@ -15,5 +16,13 @@ public static class TransformExtensions
     public static bool IsSameTransform(this Transform origin, Transform target)
     {
         return origin == target;
+    }
+
+    public static void Bounce(this Transform origin, Vector3 originScale, float scale, float duration)
+    {
+        origin.DOKill();
+
+        origin.localScale = originScale;
+        origin.DOScale(origin.localScale + Vector3.one * scale, duration).SetEase(Ease.InSine).SetLoops(2, LoopType.Yoyo);
     }
 }

@@ -38,14 +38,14 @@ public class Player : MonoBehaviour
     private float loadingDelay;
 
 
-    private Transform _transform;
-    private Rigidbody _rigidbody;
-
     private bool
         _isLoading,
         _crateIsActive;
 
+    private Rigidbody _rigidbody;
     private Coroutine _seedsLoadingRoutine;
+
+    private GameManager _gameManager;
 
     private readonly Quaternion _cameraRotationFix = Quaternion.Euler(0f, 210f, 0f);
 
@@ -100,6 +100,11 @@ public class Player : MonoBehaviour
                 stack.AddPlant(bed.Harvest());
             }
         }
+
+        if (other.CompareTag("House"))
+        {
+            stack.Unstack(_gameManager.House);
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -115,8 +120,8 @@ public class Player : MonoBehaviour
 
     private void Init()
     {
-        _transform = transform;
         _rigidbody = GetComponent<Rigidbody>();
+        _gameManager = GameManager.Instance;
     }
 
     private void UpdateMovement()

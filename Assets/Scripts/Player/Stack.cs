@@ -2,9 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Plants;
+using System.Collections;
 
 public class Stack : MonoBehaviour
 {
+    private const float UnstackInterval = 0.2f;
+
     [SerializeField]
     private StackCrate[] crates;
 
@@ -21,5 +24,29 @@ public class Stack : MonoBehaviour
 
         crate.gameObject.SetActive(true);
         crate.Show(plant.sprite);
+    }
+
+    public void Unstack(House house)
+    {
+        if (_plants.Count == 0) return;
+        StartCoroutine(UnstackRoutine(house));
+    }
+
+    private IEnumerator UnstackRoutine(House house)
+    {
+        int count = _plants.Count;
+
+        for (int i = 0; i < count; i++)
+        {
+            PlantConfiguration plant = _plants[^1];
+            StackCrate crate = crates[_plants.Count - 1];
+
+            house.Bounce();
+            crate.JumpTo(house.Body);
+            
+            _plants.SafeRemovå(plant);
+
+            yield return new WaitForSeconds(UnstackInterval);
+        }
     }
 }

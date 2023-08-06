@@ -45,7 +45,9 @@ public class GardenBed : MonoBehaviour
         PlantConfiguration config = plant.Config;
 
         plant.OnGrown -= Grown;
+
         ReadyToHarvest = false;
+        IsEmpty = true;
 
         plant.ReturnToPool();
 

@@ -65,7 +65,7 @@ public class Crate : MonoBehaviour
         if (seedsMesh.localPosition.y < MaxSeedHeight)
         {
             if (withBounce)
-                Bounce();
+                _transform.Bounce(Vector3.one * CrateScale, 0.1f, 0.3f);
 
             ChangeSeedsPosition(SeedStep);
 
@@ -91,13 +91,5 @@ public class Crate : MonoBehaviour
             _seedsCount--;
             ChangeSeedsPosition(-SeedStep);
         }
-    }
-
-    private void Bounce()
-    {
-        _transform.DOKill();
-
-        _transform.localScale = Vector3.one * CrateScale;
-        _transform.DOScale(_transform.localScale + Vector3.one * 0.1f, 0.3f).SetEase(Ease.InSine).SetLoops(2, LoopType.Yoyo);
     }
 }

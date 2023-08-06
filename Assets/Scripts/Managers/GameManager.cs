@@ -17,8 +17,10 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    [SerializeField]
-    private PoolController poolController;
 
-    public PoolController PoolController => poolController;
+    [field: SerializeField]
+    public PoolController PoolController { get; private set; }
+
+    [field: SerializeField]
+    public House House { get; private set; }
 }

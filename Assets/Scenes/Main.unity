@@ -236,7 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894e274327bc34c46a244ed3543a9f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolController: {fileID: 787777045}
+  <PoolController>k__BackingField: {fileID: 787777045}
+  <House>k__BackingField: {fileID: 265051808}
 --- !u!1001 &37912041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -629,6 +630,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 210043651}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &265051808 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 217923251297938623, guid: ded079c7be793424da1c1952af2fcf02,
+    type: 3}
+  m_PrefabInstance: {fileID: 7312306443490818871}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df0146c236dc93d41b05e248160fa6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &302144203
 GameObject:
   m_ObjectHideFlags: 0
@@ -4546,45 +4559,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7312306442971463425, guid: ded079c7be793424da1c1952af2fcf02,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7312306442983563592, guid: ded079c7be793424da1c1952af2fcf02,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7312306443256731457, guid: ded079c7be793424da1c1952af2fcf02,
         type: 3}
       propertyPath: m_RootOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7312306443256731457, guid: ded079c7be793424da1c1952af2fcf02,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 7312306443256731457, guid: ded079c7be793424da1c1952af2fcf02,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7312306443256731457, guid: ded079c7be793424da1c1952af2fcf02,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.63
-      objectReference: {fileID: 0}
-    - target: {fileID: 7312306443256731457, guid: ded079c7be793424da1c1952af2fcf02,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7312306443256731457, guid: ded079c7be793424da1c1952af2fcf02,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7312306443256731457, guid: ded079c7be793424da1c1952af2fcf02,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7312306443256731457, guid: ded079c7be793424da1c1952af2fcf02,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7312306443256731457, guid: ded079c7be793424da1c1952af2fcf02,
         type: 3}
@@ -4605,6 +4593,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House
+      objectReference: {fileID: 0}
+    - target: {fileID: 7312306443314787638, guid: ded079c7be793424da1c1952af2fcf02,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7312306443416758516, guid: ded079c7be793424da1c1952af2fcf02,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded079c7be793424da1c1952af2fcf02, type: 3}
@@ -4628,7 +4626,7 @@ PrefabInstance:
     - target: {fileID: 7858732590625824548, guid: acd14f1b6f41b14479995c33f7769357,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.788
+      value: 4.99
       objectReference: {fileID: 0}
     - target: {fileID: 7858732590625824548, guid: acd14f1b6f41b14479995c33f7769357,
         type: 3}

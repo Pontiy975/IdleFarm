@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Dock
   - Bed
+  - House
   layers:
   - Default
   - TransparentFX
