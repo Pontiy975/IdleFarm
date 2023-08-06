@@ -72,7 +72,7 @@ public class GardenBed : MonoBehaviour
         {
             case PlantType.Carrot:
             default:
-                return _controller.GetPlantFromPool<Carrot>();
+                return _controller.GetFromPool<Carrot>();
         }
     }
 

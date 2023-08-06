@@ -8,8 +8,10 @@ public class Crate : MonoBehaviour
 {
     private const int Capacity = 3;
 
-    private const float CrateScale = 1.2f;
     private const float
+        CrateScale = 1.2f,
+        BounceScale = 0.1f,
+        BounceDuration = 0.3f,
         MaxSeedHeight = 0.2f,
         SeedStep = MaxSeedHeight / Capacity;
 
@@ -65,7 +67,7 @@ public class Crate : MonoBehaviour
         if (seedsMesh.localPosition.y < MaxSeedHeight)
         {
             if (withBounce)
-                _transform.Bounce(Vector3.one * CrateScale, 0.1f, 0.3f);
+                _transform.Bounce(Vector3.one * CrateScale, BounceScale, BounceDuration);
 
             ChangeSeedsPosition(SeedStep);
 

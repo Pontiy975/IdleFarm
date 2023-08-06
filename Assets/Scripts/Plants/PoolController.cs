@@ -11,7 +11,7 @@ public class PoolController : MonoBehaviour
         _poolManager = PoolManager.Instance;
     }
 
-    public Plant GetPlantFromPool<T>() where T : Plant
+    public T GetFromPool<T>() where T : PoolableObject
     {
         return _poolManager.GetItem<T>();
     }

@@ -4,9 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Dock
   - Bed
   - House
+  - FxTemporaire
+  - PurchasingArea
+  - SeedsArea
   layers:
   - Default
   - TransparentFX

@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class StackCrate : MonoBehaviour
 {
+    private const float
+        JumpPower = 1f,
+        JumpDuration = 1f;
+
+
     [SerializeField]
     private SpriteRenderer spriteRenderer;
 
@@ -28,7 +33,7 @@ public class StackCrate : MonoBehaviour
 
         _transform.SetParent(null);
 
-        _transform.DOJump(point.position, 2f, 1, 1f).OnComplete(() =>
+        _transform.DOJump(point.position, JumpPower, 1, JumpDuration).OnComplete(() =>
         {
             _transform.SetParent(parent);
 

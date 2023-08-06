@@ -7,6 +7,8 @@ using UnityEngine.Animations.Rigging;
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
 public class Player : MonoBehaviour
 {
+    private const int PayStep = 5;
+
     [Header("Movement")]
     [SerializeField]
     private CustomJoystick joystick;
@@ -38,14 +40,17 @@ public class Player : MonoBehaviour
     private float loadingDelay;
 
 
-    private bool
-        _isLoading,
-        _crateIsActive;
+    private bool _crateIsActive;
 
+    private Transform _transform;
     private Rigidbody _rigidbody;
-    private Coroutine _seedsLoadingRoutine;
+    
+    private Coroutine
+        _seedsLoadingRoutine,
+        _purchasingRoutine;
 
     private GameManager _gameManager;
+    private PurchasingArea _currentPurchasingArea;
 
     private readonly Quaternion _cameraRotationFix = Quaternion.Euler(0f, 210f, 0f);
 
@@ -70,56 +75,49 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Dock") && !_isLoading)
+        if (other.CompareTag("SeedsArea"))
         {
-            SeedsDock dock = other.GetComponent<SeedsDock>();
+            SeedsArea dock = other.GetComponent<SeedsArea>();
 
-            _isLoading = true;
             _seedsLoadingRoutine = StartCoroutine(SeedsLoadingRoutine(dock.Type));
         }
 
         if (other.CompareTag("Bed"))
         {
             GardenBed bed = other.GetComponent<GardenBed>();
-
-            if (_crateIsActive)
-            {
-                if (bed.IsEmpty && bed.Type == crate.Type && crate.SeedsCount > 0)
-                {
-                    crate.GetSeed();
-                    bed.Planting();
-
-                    if (crate.SeedsCount <= 0)
-                    {
-                        HideCrate();
-                    }
-                }
-            }
-            else if (bed.ReadyToHarvest && !stack.IsFull)
-            {
-                stack.AddPlant(bed.Harvest());
-            }
+            BedHandling(bed);
         }
 
         if (other.CompareTag("House"))
         {
             stack.Unstack(_gameManager.House);
         }
+
+        if (other.CompareTag("PurchasingArea"))
+        {
+            _currentPurchasingArea = other.GetComponent<PurchasingArea>();
+            _purchasingRoutine = StartCoroutine(PurchasingRoutine());
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Dock") && _isLoading)
+        if (other.CompareTag("SeedsArea") && _seedsLoadingRoutine != null)
         {
-            _isLoading = false;
+            StopCoroutine(_seedsLoadingRoutine);
+            _seedsLoadingRoutine = null;
+        }
 
-            if (_seedsLoadingRoutine != null)
-                StopCoroutine(_seedsLoadingRoutine);
+        if (other.CompareTag("PurchasingArea") && _purchasingRoutine != null)
+        {
+            StopCoroutine(_purchasingRoutine);
+            _purchasingRoutine = null;
         }
     }
 
     private void Init()
     {
+        _transform = transform;
         _rigidbody = GetComponent<Rigidbody>();
         _gameManager = GameManager.Instance;
     }
@@ -182,7 +180,57 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(loadingDelay);
             crate.AddSeeds(type);
         }
+    }
 
-        _isLoading = false;
+    private IEnumerator PurchasingRoutine()
+    {
+        while (_gameManager.Money > 0 && !_currentPurchasingArea.IsPurchased)
+        {
+            int remainder = _currentPurchasingArea.Remainder;
+            int amount;
+            
+            if (_gameManager.Money >= remainder)
+            {
+                amount = remainder > PayStep ? PayStep : remainder;
+            }
+            else
+            {
+                amount = _gameManager.Money > PayStep ? PayStep : _gameManager.Money;
+            }
+
+            _gameManager.ChangeMoney(-amount);
+            _currentPurchasingArea.Pay(amount);
+
+            Coin coin = _gameManager.PoolController.GetFromPool<Coin>();
+            coin.transform.position = _transform.position;
+            coin.JumpTo(_currentPurchasingArea.transform, _gameManager.PoolController);
+
+            _currentPurchasingArea.Bounce();
+
+
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+
+    private void BedHandling(GardenBed bed)
+    {
+        if (bed.ReadyToHarvest && !stack.IsFull)
+        {
+            stack.AddPlant(bed.Harvest());
+        }
+
+        if (_crateIsActive)
+        {
+            if (bed.IsEmpty && bed.Type == crate.Type && crate.SeedsCount > 0)
+            {
+                crate.GetSeed();
+                bed.Planting();
+
+                if (crate.SeedsCount <= 0)
+                {
+                    HideCrate();
+                }
+            }
+        }
     }
 }

@@ -52,7 +52,7 @@ public class Stack : MonoBehaviour
             crate.JumpTo(house.Body);
             
             _plants.SafeRemovå(plant);
-            _gameManager.IncreaseMoney(plant.cost);
+            _gameManager.ChangeMoney(plant.cost);
 
             yield return new WaitForSeconds(UnstackInterval);
         }

@@ -30,12 +30,14 @@ public class GameManager : MonoBehaviour
 
     private int _money;
 
+    public int Money => _money;
+
     private void Start()
     {
         UIManager.ChangeMoney(_money);
     }
 
-    public void IncreaseMoney(int value)
+    public void ChangeMoney(int value)
     {
         _money += value;
         UIManager.ChangeMoney(_money);
