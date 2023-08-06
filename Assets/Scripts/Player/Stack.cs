@@ -15,7 +15,14 @@ public class Stack : MonoBehaviour
 
     private int _capacity = 3;
 
+    private GameManager _gameManager;
+
     public bool IsFull => _plants.Count >= _capacity;
+
+    private void Start()
+    {
+        _gameManager = GameManager.Instance;
+    }
 
     public void AddPlant(PlantConfiguration plant)
     {
@@ -45,6 +52,7 @@ public class Stack : MonoBehaviour
             crate.JumpTo(house.Body);
             
             _plants.SafeRemovå(plant);
+            _gameManager.IncreaseMoney(plant.cost);
 
             yield return new WaitForSeconds(UnstackInterval);
         }

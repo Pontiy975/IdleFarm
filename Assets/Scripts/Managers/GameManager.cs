@@ -19,8 +19,25 @@ public class GameManager : MonoBehaviour
 
 
     [field: SerializeField]
+    public UIManager UIManager { get; private set; }
+
+    [field: SerializeField]
     public PoolController PoolController { get; private set; }
 
     [field: SerializeField]
     public House House { get; private set; }
+
+
+    private int _money;
+
+    private void Start()
+    {
+        UIManager.ChangeMoney(_money);
+    }
+
+    public void IncreaseMoney(int value)
+    {
+        _money += value;
+        UIManager.ChangeMoney(_money);
+    }
 }
