@@ -71,5 +71,14 @@ namespace Plants
         {
             OnGrown?.Invoke();
         }
+
+        public override void OnDespawn()
+        {
+            base.OnDespawn();
+
+            isPlanted = false;
+            isGrownUp = false;
+            _cooldown = growthTime;
+        }
     }
 }

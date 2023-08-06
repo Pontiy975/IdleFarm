@@ -202,13 +202,12 @@ public class Player : MonoBehaviour
             _currentPurchasingArea.Pay(amount);
 
             Coin coin = _gameManager.PoolController.GetFromPool<Coin>();
-            coin.transform.position = _transform.position;
+            coin.transform.position = _transform.position + Vector3.up;
             coin.JumpTo(_currentPurchasingArea.transform, _gameManager.PoolController);
 
             _currentPurchasingArea.Bounce();
 
-
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
