@@ -19,15 +19,19 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float speed, rotationSpeed;
 
+    [Space]
 
     [Header("Animations")]
     [SerializeField]
     private Animator animator;
 
+    [Space]
 
     [Header("Crate")]
     [SerializeField]
     private Crate crate;
+
+    [Space]
 
     [Header("Stack")]
     [SerializeField]
@@ -38,6 +42,15 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float loadingDelay;
+
+    [Space]
+
+    [Header("Tools")]
+    [SerializeField]
+    private GameObject axe;
+
+    [SerializeField]
+    private AxeAnimationHandler axeHandler;
 
 
     private bool _crateIsActive;
@@ -51,6 +64,8 @@ public class Player : MonoBehaviour
 
     private GameManager _gameManager;
     private PurchasingArea _currentPurchasingArea;
+    private Cluster _cluster;
+
 
     private readonly Quaternion _cameraRotationFix = Quaternion.Euler(0f, 210f, 0f);
 
@@ -73,6 +88,11 @@ public class Player : MonoBehaviour
         UpdateMovement();
     }
 
+    private void OnDestroy()
+    {
+        axeHandler.OnCutting -= WoodCutting;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("SeedsArea"))
@@ -93,6 +113,15 @@ public class Player : MonoBehaviour
             stack.Unstack(_gameManager.House);
         }
 
+        if (other.CompareTag("Cluster"))
+        {
+            _cluster = other.GetComponentInParent<Cluster>();
+            _cluster.OnCutted += StopCutting;
+
+            axe.SetActive(true);
+            animator.SetBool("IsCutting", true);
+        }
+
         if (other.CompareTag("PurchasingArea"))
         {
             _currentPurchasingArea = other.GetComponent<PurchasingArea>();
@@ -108,6 +137,11 @@ public class Player : MonoBehaviour
             _seedsLoadingRoutine = null;
         }
 
+        if (other.CompareTag("Cluster"))
+        {
+            StopCutting();
+        }
+
         if (other.CompareTag("PurchasingArea") && _purchasingRoutine != null)
         {
             StopCoroutine(_purchasingRoutine);
@@ -120,6 +154,8 @@ public class Player : MonoBehaviour
         _transform = transform;
         _rigidbody = GetComponent<Rigidbody>();
         _gameManager = GameManager.Instance;
+
+        axeHandler.OnCutting += WoodCutting;
     }
 
     private void UpdateMovement()
@@ -231,5 +267,21 @@ public class Player : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void WoodCutting()
+    {
+        if (_cluster)
+        {
+            _cluster.Cutting();
+        }
+    }
+
+    private void StopCutting()
+    {
+        _cluster.OnCutted -= StopCutting;
+        _cluster = null;
+        axe.SetActive(false);
+        animator.SetBool("IsCutting", false);
     }
 }

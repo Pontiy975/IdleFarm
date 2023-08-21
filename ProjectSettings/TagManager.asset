@@ -9,6 +9,7 @@ TagManager:
   - FxTemporaire
   - PurchasingArea
   - SeedsArea
+  - Cluster
   layers:
   - Default
   - TransparentFX

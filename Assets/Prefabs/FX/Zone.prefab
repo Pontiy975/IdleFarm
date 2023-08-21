@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5308358087394090373}
   - component: {fileID: 2211998090685907182}
   m_Layer: 0
-  m_Name: UnstackZone
+  m_Name: Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

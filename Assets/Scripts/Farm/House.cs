@@ -15,6 +15,6 @@ public class House : MonoBehaviour
 
     public void Bounce()
     {
-        body.Bounce(Vector3.one * BaseScale, BounceScale, BounceDuration);
+        body.BounceY(Vector3.one * BaseScale, BounceScale, BounceDuration);
     }
 }

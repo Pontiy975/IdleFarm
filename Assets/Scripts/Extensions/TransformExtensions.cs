@@ -20,9 +20,20 @@ public static class TransformExtensions
 
     public static void Bounce(this Transform origin, Vector3 originScale, float scale, float duration)
     {
-        origin.DOKill();
-
-        origin.localScale = originScale;
+        ResetScale(origin, originScale);
         origin.DOScale(origin.localScale + Vector3.one * scale, duration).SetEase(Ease.InSine).SetLoops(2, LoopType.Yoyo);
+    }
+
+    public static void BounceY(this Transform origin, Vector3 originScale, float scale, float duration)
+    {
+        ResetScale(origin, originScale);
+        origin.DOScaleY(origin.localScale.y + scale, duration).SetEase(Ease.InSine).SetLoops(2, LoopType.Yoyo);
+    }
+
+
+    private static void ResetScale(Transform origin, Vector3 originScale)
+    {
+        origin.DOKill();
+        origin.localScale = originScale;
     }
 }
