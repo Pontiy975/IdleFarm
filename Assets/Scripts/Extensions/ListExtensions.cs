@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using UnityEngine;
+
 
 public static class ListExtensions
 {
-    public static void SafeRemovå<T>(this List<T> list, T item)
+    public static void SafeRemove<T>(this List<T> list, T item)
     {
         if (list.Contains(item))
         {
