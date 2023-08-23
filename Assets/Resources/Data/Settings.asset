@@ -15,5 +15,9 @@ MonoBehaviour:
   plants:
   - type: 0
     sprite: {fileID: 21300000, guid: 1fbdfb9bf6c2e4397a1d62eed589ec1f, type: 3}
-    growthTime: 10
+    growthTime: 20
     cost: 10
+  - type: 1
+    sprite: {fileID: 21300000, guid: bb7faf4c850ef48cdb33c2bd17737619, type: 3}
+    growthTime: 50
+    cost: 20

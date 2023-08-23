@@ -6,8 +6,8 @@ namespace Plants
     public enum PlantType
     {
         Carrot,
-        Corn,
         Tomato,
+        Corn,
         None
     }
 

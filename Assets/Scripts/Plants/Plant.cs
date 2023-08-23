@@ -39,7 +39,7 @@ namespace Plants
             _transform.rotation = Quaternion.Euler(0f, Random.Range(0f, 180f), 0f);
 
             _transform.localScale = new Vector3(1f, 0f, 1f);
-            _transform.DOScaleY(0.8f, 0.3f).SetEase(Ease.OutBounce);
+            _transform.DOScaleY(1f, 0.3f).SetEase(Ease.OutBounce);
         }
 
         public void Init(PlantConfiguration plant)
@@ -53,6 +53,15 @@ namespace Plants
         }
 
         public abstract void ReturnToPool();
+
+        public override void OnDespawn()
+        {
+            base.OnDespawn();
+
+            isPlanted = false;
+            isGrownUp = false;
+            _cooldown = growthTime;
+        }
 
 
         protected void Timer()
@@ -70,15 +79,6 @@ namespace Plants
         protected virtual void Growth()
         {
             OnGrown?.Invoke();
-        }
-
-        public override void OnDespawn()
-        {
-            base.OnDespawn();
-
-            isPlanted = false;
-            isGrownUp = false;
-            _cooldown = growthTime;
         }
     }
 }

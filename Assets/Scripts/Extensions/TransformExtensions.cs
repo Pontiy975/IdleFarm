@@ -18,10 +18,10 @@ public static class TransformExtensions
         return origin == target;
     }
 
-    public static void Bounce(this Transform origin, Vector3 originScale, float scale, float duration)
+    public static void Bounce(this Transform origin, Vector3 originScale, float scaleMultiplier, float duration)
     {
         ResetScale(origin, originScale);
-        origin.DOScale(origin.localScale + Vector3.one * scale, duration).SetEase(Ease.InSine).SetLoops(2, LoopType.Yoyo);
+        origin.DOScale(origin.localScale + Vector3.one * scaleMultiplier, duration).SetEase(Ease.InSine).SetLoops(2, LoopType.Yoyo);
     }
 
     public static void BounceY(this Transform origin, Vector3 originScale, float scale, float duration)
