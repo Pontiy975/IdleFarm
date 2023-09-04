@@ -155,6 +155,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64836d8b3c1dc924e822196aafcc5128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerArea: {fileID: 0}
+  zone: {fileID: 5540709906625118636}
+  areaObjects: []
   body: {fileID: 8158777054877830526}
   stages:
   - {fileID: 8172212254614199453}
@@ -539,6 +542,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5308358087394090426, guid: 13008523e870e8a48be6a28496fb3f44,
         type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5308358087394090426, guid: 13008523e870e8a48be6a28496fb3f44,
+        type: 3}
       propertyPath: m_TagString
       value: Cluster
       objectReference: {fileID: 0}
@@ -547,6 +555,12 @@ PrefabInstance:
 --- !u!4 &5540709906625118611 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5308358087394090373, guid: 13008523e870e8a48be6a28496fb3f44,
+    type: 3}
+  m_PrefabInstance: {fileID: 382697957957475350}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5540709906625118636 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5308358087394090426, guid: 13008523e870e8a48be6a28496fb3f44,
     type: 3}
   m_PrefabInstance: {fileID: 382697957957475350}
   m_PrefabAsset: {fileID: 0}

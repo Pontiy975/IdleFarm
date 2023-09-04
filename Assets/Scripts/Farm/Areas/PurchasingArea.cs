@@ -1,11 +1,12 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 
-public class PurchasingArea : MonoBehaviour
+public class PurchasingArea : LockObject
 {
+    public event Action OnPurchased;
+
     private const float
         BodyBounceScale = 0.15f,
         BodyBounceDuration = 0.1f;
@@ -38,13 +39,19 @@ public class PurchasingArea : MonoBehaviour
 
         if (IsPurchased)
         {
+            OnPurchased?.Invoke();
+
             purchasedObject.gameObject.SetActive(true);
             purchasedObject.localScale = Vector3.zero;
 
             purchasedObject.DOScale(1f, 0.3f)
                 .SetEase(Ease.OutBack)
                 .SetDelay(0.3f)
-                .OnComplete(() => gameObject.SetActive(false));
+                .OnComplete(() =>
+                {
+                    ProgressManager.Instance.UnlockNext(this);
+                    gameObject.SetActive(false);
+                });
 
             transform.DOScale(0f, 0.3f).SetEase(Ease.InBack);
         }

@@ -4,8 +4,8 @@ using UnityEngine;
 public class Coin : PoolableObject
 {
     private const float
-        JumpPower = 1f,
-        JumpDuration = 0.3f;
+        JumpPower = 0.7f,
+        JumpDuration = 0.5f;
 
     private Transform _transform;
 

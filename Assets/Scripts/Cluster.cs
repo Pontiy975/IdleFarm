@@ -3,13 +3,16 @@ using System;
 using UnityEngine;
 
 
-public class Cluster : MonoBehaviour
+public class Cluster : LockObject
 {
     private static float
         PunchMultiplier = 0.1f,
         AnimationDuration = 0.3f;
 
     public event Action OnCutted;
+
+    [SerializeField]
+    private GameObject zone;
 
     [SerializeField]
     private Transform[] areaObjects;
@@ -60,5 +63,11 @@ public class Cluster : MonoBehaviour
                 }
             }
         });
+    }
+
+
+    public override void Unlock()
+    {
+        zone.SetActive(true);
     }
 }

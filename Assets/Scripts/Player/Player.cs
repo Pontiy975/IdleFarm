@@ -238,7 +238,7 @@ public class Player : MonoBehaviour
             _currentPurchasingArea.Pay(amount);
 
             Coin coin = _gameManager.PoolController.GetFromPool<Coin>();
-            coin.transform.position = _transform.position + Vector3.up;
+            coin.transform.position = _transform.position + Vector3.up * 0.5f;
             coin.JumpTo(_currentPurchasingArea.transform, _gameManager.PoolController);
 
             _currentPurchasingArea.Bounce();
