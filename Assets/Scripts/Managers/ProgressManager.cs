@@ -25,7 +25,8 @@ public class ProgressManager : MonoBehaviour
     public void UnlockNext(LockObject lockable)
     {
         int index = lockedObjects.IndexOf(lockable);
-        
+        print(index);
+
         if (index >= 0 && lockedObjects.Count > index)
         {
             LockObject obj = lockedObjects[index + 1];

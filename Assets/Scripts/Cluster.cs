@@ -46,7 +46,11 @@ public class Cluster : LockObject
                 
                 _transform.DOScaleY(0f, AnimationDuration)
                           .SetEase(Ease.InBack)
-                          .OnComplete(() => gameObject.SetActive(false));
+                          .OnComplete(() =>
+                          {
+                              ProgressManager.Instance.UnlockNext(this);
+                              gameObject.SetActive(false);
+                          });
 
                 foreach (var obj in areaObjects)
                 {
